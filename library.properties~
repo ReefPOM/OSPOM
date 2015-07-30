@@ -7,6 +7,6 @@ paragraph=It works by connecting via USB to an internet conected linux cpu and O
 category=Cloud
 url=https://github.com/ReefPOM/OSPOM
 architectures=avr
-version=0.1.2
+
 
 
