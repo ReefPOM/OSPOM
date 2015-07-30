@@ -1,4 +1,4 @@
-/*  Reef Ai Core Power Bar
+/*  Reef POM Example Sketch
  * 
  *
  * Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact:  Staff@ReefAi.com
+ * Contact:  Staff@ReefPOM.com
  *
  *
-Arduino Pinout: 
+Example Arduino Pinout (Core Power Bar): 
 2 AC Phase Input
 11 Traic #1 (new)
 3 Triac #2
@@ -40,8 +40,8 @@ ADC7 pH Reading
 17 Top LED
 18 DIY Pin #2 (SDA)
 19 DIY Pin #1 (SCL)
-*/
-/* Core Power Bar Element List
+
+Example Element List (Core Power Bar)
 Element, Function, Pin#
 1  ,  Triac#1  ,  11
 2  ,  Triac#2  ,  3
@@ -76,15 +76,15 @@ void loop() {
     /*
     Put any standard arduino code in here that you want to run over and over again.
     OSPOM Functions:
-    ospom.define(Pin Number, Pin Type, PinFunction, PinID);  = Define OSPOM Internet Dashboard accessable Sensor or Actuator Elements
+    ospom.define(Pin#, Type, Function, ID);  = Define OSPOM Internet Dashboard accessable Sensor or Actuator Elements
                example: ospom.define(7, 's', ospom.anaRead, "stfw0000");
-    ospom.read();  = Read OSPOM Sensors or Actuators and recieve the result
-    ospom.write();  = Write OSPOM Sensors or Actuators using this function
-       **Writing a pin that is part of the OSPOM dashboard without using this function will cause
+    ospom.read(Pin#, ReadType);  = Read OSPOM Sensors or Actuators and recieve the result
+    ospom.write(Pin#, WriteType);  = Write OSPOM Sensors or Actuators using this function
+    ospom.webSet(Pin#, Value); = Sets the value of the Element with the Pin# specified, so the
+  					Dashboard will get the new data
+    	**Writing a pin that is part of the OSPOM dashboard without using this function will cause
            the dashboard to be confused
-    
     **Dont forget to Write your own OSPOM Configuation Sketch to setup your arduino, 
        or run the OSPOM Generic Configuration sketch at least once before calling any ospom functions
     */
 }
-

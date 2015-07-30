@@ -15,12 +15,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+<<<<<<< HEAD
+ * Contact:  Staff@ReefPOM.com
+=======
  * Contact:  Staff@ReefAi.com
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 */
 
 
 #include "Ospom.h"
 #include "EEPROMex.h"
+<<<<<<< HEAD
+#include "CapacitiveSensor.h"    //Capacitive Sensing Library
+=======
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 
 // Constructor 
 // Function that handles the creation and setup of instances 
@@ -597,7 +605,11 @@ void Ospom::readSensors(void) {
   for (int i = 0; i < 20; i++) {
     if (ElementType[i] == 's') {   //s = sensor, a = actuator, n = nothing
       if (ElementFunction[i] == 1) {  // 0=unused, 1=analogRead, 2=digitalRead, 3=analogWrite, 4=digitalWrite, 5=triac
+<<<<<<< HEAD
+						//6=Flow, 7=Level, 10=Loaded by the generic EEPROMLoader program
+=======
 						//10=Loaded by the generic EEPROMLoader program
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 	//Analog Reading Section
 	counter++;
 	ElementVal[i][index] = ElementVal[i][index] + analogRead(ElementPin[i]); // read from the sensor:
@@ -644,8 +656,12 @@ void Ospom::readSensors(void) {
 	  }
 	}
       }
+<<<<<<< HEAD
+      //Complex sensor functions such as Level and Flow will be in the sketch
+=======
       //else if (ElementFunction[i] ==
       //Create this section to read complex sensor functions such as Level and Flow
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
     }
   }  
 }
@@ -684,7 +700,10 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
   ZeroCross = digitalRead(2);
   if (ZeroCross) {
     ZeroCrossTime = TimeNowMicro;
+<<<<<<< HEAD
+=======
  //   Serial.println("ZeroCross");
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
   }
   if ((ZeroCross) && (ZeroCrossTime > LastCrossTime + 7000)) {  //avoids repeat ZeroCross measurements
     LastCrossTime = ZeroCrossTime;                              //There are 8300micro seconds in half a sign wave @ 60Hz
@@ -699,7 +718,11 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
 //        TriacDelayMicro = 8000 - TriacDelayMicro;  // MilliDelay=8300-(83*%Dim)
 	TriacDelayMicro = ElementTotalValue[i];
   	if ((TimeNowMicro > LastCrossTime + TriacDelayMicro) && (TimeNowMicro < LastCrossTime + 8000) && (TimeNowMicro > LastPulse[i] + 8000 - TriacDelayMicro)) {
+<<<<<<< HEAD
+    	  digitalWrite(ElementPin[i], HIGH);   //Turn on the Triac if it's time, and you havent already just done it     
+=======
     	  digitalWrite(ElementPin[i], HIGH);   //Turn on the Triac if it's time, and you havent already just done it
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 	  LastPulse[i] = TimeNowMicro;  //the last time the particular triac was pulsed on
   	}
       }
@@ -712,8 +735,30 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
   } 
 }
 
+<<<<<<< HEAD
+void Ospom::capacitiveSensing() {
+  //This function does all the capacitive sensing
+  int FillPins[] = {3,4,13,11,10,5,6,7,8,9,12};
+  //Recieve 2 input integers, fill and sense
+  for (int i=0; i<20; i++) {
+    if (ElementType[i] == 's') {   //s = sensor, a = actuator, n = nothing
+      if (ElementFunction[i] == 8) {  // 8=Capacitive Sensing
+   	CapacitiveSensor   capSensor1 = CapacitiveSensor(2,pins[i]);
+   	LevelSensor1.set_CS_Timeout_Millis(4000);
+  	 LevelSensor1.set_CS_AutocaL_Millis(0xFFFFFFFF);
+
+   	int CapVal1 = LevelSensor1.capacitiveSensorRaw(4);
+   	Serial.print("#");
+   	Serial.print(i);
+   	Serial.print(": ");
+   	Serial.println(CapVal1);
+      }
+    }
+  }
+=======
 void Ospom::levelSensing() {
   //This function does all the level sensing work
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 }
 
 
@@ -794,3 +839,20 @@ void Ospom::write(void) {
   }
 */
 }
+<<<<<<< HEAD
+
+void Ospom::WebSet(void) {
+
+}
+
+
+
+
+
+
+
+
+
+
+=======
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11

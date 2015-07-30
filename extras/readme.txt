@@ -1,4 +1,4 @@
-#include<Ospom> adds features necessary for all Ai arduino's
+#include<Ospom> adds features necessary for all OSPOM arduino's
 
 	Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
 
@@ -15,7 +15,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 You should have received a copy of the GNU Lesser General Public 
 License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Contact:  Staff@ReefAi.com
+Contact:  Staff@ReefPOM.com
 
 
 Notes:

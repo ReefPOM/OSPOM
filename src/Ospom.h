@@ -35,11 +35,19 @@ class Ospom   //Wrap up all functions and variables of Ospom in this class
     void define(int, char, int, String);
     void read(void);
     void write(void);
+<<<<<<< HEAD
+    void webSet(void);
+=======
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
     int anaRead = 1;
     int digiRead = 2;
     int anaWrite = 3;
     int digiWrite = 4;
     int triac = 5;
+<<<<<<< HEAD
+    int flow = 6;
+=======
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
     int level = 7;
    
   private:  //Functions and variables only available to the Ospom library
@@ -69,7 +77,11 @@ class Ospom   //Wrap up all functions and variables of Ospom in this class
     void elementParse(void);
     void watchDog(void);
     void triacDimming(void);
+<<<<<<< HEAD
+    void capacitiveSensing(void);
+=======
     void levelSensing(void);
+>>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 
 	//Variables
     boolean groupCommand;

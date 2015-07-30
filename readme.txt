@@ -1,4 +1,4 @@
-This is the Bit Bucket Repo for the OSPOM include, for the purpose of being included in Arduino.cc's User contributed Libraries page.
+This is the Git Hub Repo for the OSPOM include, for the purpose of being included in Arduino.cc's User contributed Libraries page.
 
 #include<Ospom> adds features necessary for all Ospom Arduino's
 
