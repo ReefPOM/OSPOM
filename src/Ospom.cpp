@@ -1,5 +1,5 @@
-/* Ospom include.cpp File
- *
+/* Ospom include.cpp File *
+ *  
  * Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
  *
  * This program is free software: you can redistribute it and/or modify

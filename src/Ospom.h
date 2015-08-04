@@ -1,4 +1,4 @@
-/* Ospom include.h File
+/* Ospom include.h File *
  *
  * Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
  *
