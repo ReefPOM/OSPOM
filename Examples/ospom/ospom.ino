@@ -1,5 +1,5 @@
 /*  Reef POM Example Sketch
- * 
+ *     For more information visit BitBucket.org/ReefPOM
  *
  * Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
  *
@@ -19,7 +19,7 @@
  * Contact:  Staff@ReefPOM.com
  *
  *
-Example Arduino Pinout (Core Power Bar): 
+Example Arduino Pinout (Reef POM Core Power Bar): 
 2 AC Phase Input
 11 Traic #1 (new)
 3 Triac #2

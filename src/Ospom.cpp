@@ -15,20 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
-<<<<<<< HEAD
  * Contact:  Staff@ReefPOM.com
-=======
- * Contact:  Staff@ReefAi.com
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 */
 
 
 #include "Ospom.h"
 #include "EEPROMex.h"
-<<<<<<< HEAD
-#include "CapacitiveSensor.h"    //Capacitive Sensing Library
-=======
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
+//#include "CapacitiveSensor.h"    //Capacitive Sensing Library
 
 // Constructor 
 // Function that handles the creation and setup of instances 
@@ -602,18 +595,134 @@ void Ospom::readSensors(void) {
   static int counter;
   static int counter1;
   numReadings = 5;
+  boolean advance = true;
+
   for (int i = 0; i < 20; i++) {
     if (ElementType[i] == 's') {   //s = sensor, a = actuator, n = nothing
       if (ElementFunction[i] == 1) {  // 0=unused, 1=analogRead, 2=digitalRead, 3=analogWrite, 4=digitalWrite, 5=triac
-<<<<<<< HEAD
 						//6=Flow, 7=Level, 10=Loaded by the generic EEPROMLoader program
-=======
-						//10=Loaded by the generic EEPROMLoader program
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 	//Analog Reading Section
-	counter++;
-	ElementVal[i][index] = ElementVal[i][index] + analogRead(ElementPin[i]); // read from the sensor:
-	if (counter > 2) {
+	ElementVal[i][index] = ElementVal[i][index] + analogRead(ElementPin[i]); // add 3 sensor readigns together
+/*        Serial.print("AnalogRead Pin: ");
+	Serial.print(ElementPin[i]);
+	Serial.print(", ");
+	Serial.println(analogRead(ElementPin[i]));
+*/
+      }
+    }
+  }
+  counter++;
+  if (counter > 2) {
+    counter = 0;
+    for (int i = 0; i < 20; i++) {
+      if (ElementType[i] == 's') {
+        if (ElementFunction[i] == 1) {
+	  ElementTotalValue[i] = ElementTotalValue[i] + ElementVal[i][index]; // add the reading to the total
+	    // calculate the average: 
+	  if (startupAid){
+	    ElementAvg[i] = ElementTotalValue[i] / ((index + 1) * 3);   //fixes wrong avg at the beginning
+	  }
+	  else {
+	    ElementAvg[i] = (ElementTotalValue[i] / (numReadings * 3));
+	  }
+	    //Calibrate
+	  ElementCalVal[i] = ElementAvg[i] - ElementYintEx[i];
+	  ElementCalVal[i] = ElementCalVal[i] / ElementSlopeFS[i];
+	  }
+	}
+      }
+/*
+Serial.print("index: ");
+Serial.println(index);
+Serial.print("counter: ");
+Serial.println(counter);
+Serial.print("counter1: ");
+Serial.println(counter1);
+Serial.print("ElementVal[i][index]: ");
+Serial.println(ElementVal[9][index]);
+Serial.print(ElementVal[9][0]);
+Serial.print(",");
+Serial.print(ElementVal[9][1]);
+Serial.print(",");
+Serial.print(ElementVal[9][2]);
+Serial.print(",");
+Serial.print(ElementVal[9][3]);
+Serial.print(",");
+Serial.println(ElementVal[9][4]);	
+*/
+
+    index++;
+    if (index >= numReadings) {
+      index = 0;
+      startupAid = false;
+    }
+    //Clean Up
+    for (int i = 0; i < 20; i++) {
+      if (ElementType[i] == 's') {
+        if (ElementFunction[i] == 1) {
+    	  ElementTotalValue[i] = ElementTotalValue[i] - ElementVal[i][index]; // subtract the last reading:
+    	  ElementVal[i][index] = 0;  //clear the added up element value
+	}
+      }
+    }
+/*
+Serial.println("After the Cleanup");
+Serial.print("ElementVal[i][index]: ");
+Serial.println(ElementVal[9][index]);
+Serial.print(ElementVal[9][0]);
+Serial.print(",");
+Serial.print(ElementVal[9][1]);
+Serial.print(",");
+Serial.print(ElementVal[9][2]);
+Serial.print(",");
+Serial.print(ElementVal[9][3]);
+Serial.print(",");
+Serial.println(ElementVal[9][4]);
+
+Serial.print("ElementTotalValue: ");
+Serial.println(ElementTotalValue[9]);
+Serial.print("ElementAvg: ");
+Serial.println(ElementAvg[9]);
+Serial.print("ElementCalVal: ");
+Serial.println(ElementCalVal[9]);
+*/
+  }
+
+
+
+/*
+  for (int i = 0; i < 20; i++) {
+    if (ElementType[i] == 's') {   //s = sensor, a = actuator, n = nothing
+      if (ElementFunction[i] == 1) {  // 0=unused, 1=analogRead, 2=digitalRead, 3=analogWrite, 4=digitalWrite, 5=triac
+						//6=Flow, 7=Level, 10=Loaded by the generic EEPROMLoader program
+	//Analog Reading Section
+Serial.print("ElementVal[i][index]: ");
+Serial.println(ElementVal[i][index]);
+	ElementVal[i][index] = ElementVal[i][index] + analogRead(ElementPin[i]); // add 3 sensor readigns together
+
+if (i == 9) {
+Serial.print("ElementNumber: ");  //########DEBUGGING
+Serial.println(i+1);
+Serial.print("index: ");
+Serial.println(index);
+Serial.print("counter: ");
+Serial.println(counter);
+Serial.print("counter1: ");
+Serial.println(counter1);
+Serial.print("ElementVal[i][index]: ");
+Serial.println(ElementVal[i][index]);
+Serial.print(ElementVal[i][0]);
+Serial.print(",");
+Serial.print(ElementVal[i][1]);
+Serial.print(",");
+Serial.print(ElementVal[i][2]);
+Serial.print(",");
+Serial.print(ElementVal[i][3]);
+Serial.print(",");
+Serial.println(ElementVal[i][4]);	
+}
+
+	if (counter > 2) {  //
 	  ElementTotalValue[i] = ElementTotalValue[i] + ElementVal[i][index]; // add the reading to the total:
 	  // calculate the average: 
 	  if (startupAid){
@@ -625,11 +734,21 @@ void Ospom::readSensors(void) {
 	  //Calibrate
   	  ElementCalVal[i] = ElementAvg[i] + ElementYintEx[i];
   	  ElementCalVal[i] = ElementCalVal[i] / ElementSlopeFS[i];
+//Serial.print("ElementCalVal[i]: ");
+//Serial.println(ElementCalVal[i]);
+
 	  // advance to the next position in the array:  
-  	  index = index + 1; 
-	  counter = 0;
+//***Something Seems Fishy around here****
+	  if (advance) {  //Index everthing forward once the for-loop runs 3 times
+  	    index = index + 1;
+	    counter = 0;
+	    advance = false;
+	  }
+Serial.println("zeroing ElementVal[i][index]");
 	  ElementTotalValue[i] = ElementTotalValue[i] - ElementVal[i][index]; // subtract the last reading:
 	  ElementVal[i][index] = 0;  //clear the added up element value
+Serial.print("ElementVal[i][index]: ");
+Serial.println(ElementVal[i][index]);
 	  if (index >= numReadings) {    
             // ...wrap around to the beginning:
             index = 0;   
@@ -638,6 +757,21 @@ void Ospom::readSensors(void) {
             startupAid = false;
           } 
 	}
+
+
+Serial.print("Slope: ");
+Serial.println(ElementSlopeFS[i]);
+Serial.print("Y-int: ");
+Serial.println(ElementYintEx[i]);
+Serial.print("ElementVal[]: ");
+Serial.println(ElementVal[i][index]);
+Serial.print("ElementTotalValue: ");
+Serial.println(ElementTotalValue[i]);
+Serial.print("ElementAvg: ");
+Serial.println(ElementAvg[i]);
+Serial.print("ElementCalVal: ");
+Serial.println(ElementCalVal[i]);
+
       }
       else if (ElementFunction[i] == 2) {
 	//Digital Reading Section
@@ -656,14 +790,10 @@ void Ospom::readSensors(void) {
 	  }
 	}
       }
-<<<<<<< HEAD
       //Complex sensor functions such as Level and Flow will be in the sketch
-=======
-      //else if (ElementFunction[i] ==
-      //Create this section to read complex sensor functions such as Level and Flow
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
     }
   }  
+*/
 }
 
 
@@ -700,10 +830,6 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
   ZeroCross = digitalRead(2);
   if (ZeroCross) {
     ZeroCrossTime = TimeNowMicro;
-<<<<<<< HEAD
-=======
- //   Serial.println("ZeroCross");
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
   }
   if ((ZeroCross) && (ZeroCrossTime > LastCrossTime + 7000)) {  //avoids repeat ZeroCross measurements
     LastCrossTime = ZeroCrossTime;                              //There are 8300micro seconds in half a sign wave @ 60Hz
@@ -718,11 +844,7 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
 //        TriacDelayMicro = 8000 - TriacDelayMicro;  // MilliDelay=8300-(83*%Dim)
 	TriacDelayMicro = ElementTotalValue[i];
   	if ((TimeNowMicro > LastCrossTime + TriacDelayMicro) && (TimeNowMicro < LastCrossTime + 8000) && (TimeNowMicro > LastPulse[i] + 8000 - TriacDelayMicro)) {
-<<<<<<< HEAD
     	  digitalWrite(ElementPin[i], HIGH);   //Turn on the Triac if it's time, and you havent already just done it     
-=======
-    	  digitalWrite(ElementPin[i], HIGH);   //Turn on the Triac if it's time, and you havent already just done it
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
 	  LastPulse[i] = TimeNowMicro;  //the last time the particular triac was pulsed on
   	}
       }
@@ -735,10 +857,9 @@ void Ospom::triacDimming(void) { //Function that deals with dimming 115 or 230v 
   } 
 }
 
-<<<<<<< HEAD
 void Ospom::capacitiveSensing() {
   //This function does all the capacitive sensing
-  int FillPins[] = {3,4,13,11,10,5,6,7,8,9,12};
+/*  int FillPins[] = {3,4,13,11,10,5,6,7,8,9,12};
   //Recieve 2 input integers, fill and sense
   for (int i=0; i<20; i++) {
     if (ElementType[i] == 's') {   //s = sensor, a = actuator, n = nothing
@@ -755,10 +876,7 @@ void Ospom::capacitiveSensing() {
       }
     }
   }
-=======
-void Ospom::levelSensing() {
-  //This function does all the level sensing work
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
+*/
 }
 
 
@@ -839,9 +957,8 @@ void Ospom::write(void) {
   }
 */
 }
-<<<<<<< HEAD
 
-void Ospom::WebSet(void) {
+void Ospom::Set(void) {
 
 }
 
@@ -854,5 +971,3 @@ void Ospom::WebSet(void) {
 
 
 
-=======
->>>>>>> ae57b8b986212ac7d9bfcc69d961c4f95bc04e11
