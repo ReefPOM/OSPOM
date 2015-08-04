@@ -1,4 +1,5 @@
-This is the Git Hub Repo for the OSPOM include, for the purpose of being included in Arduino.cc's User contributed Libraries page.
+Visit BitBucket.org/ReefPOM for more details.
+This is the Git Hub Repo for released versions of the OSPOM include.  Our BitBucket has the most up-to-date information.
 
 #include<Ospom> adds features necessary for all Ospom Arduino's
 
