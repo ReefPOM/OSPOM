@@ -1,7 +1,6 @@
 Visit BitBucket.org/ReefPOM for more details.
 This is the Git Hub Repo for released versions of the OSPOM include.  Our BitBucket has the most up-to-date information.
-![ElementOrientedProgramming](https://{bitbucket.org/repo/yz4B4k/images/663084570-ElementOrientedProgramming.png})
-![ScreenShot](https://{url})
+
 **#include<Ospom> adds features necessary for all Ospom Arduino's**
 
 *Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
