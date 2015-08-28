@@ -1,9 +1,10 @@
 Visit BitBucket.org/ReefPOM for more details.
 This is the Git Hub Repo for released versions of the OSPOM include.  Our BitBucket has the most up-to-date information.
+![ElementOrientedProgramming](https://{bitbucket.org/repo/yz4B4k/images/663084570-ElementOrientedProgramming.png})
+![ScreenShot](https://{url})
+**#include<Ospom> adds features necessary for all Ospom Arduino's**
 
-#include<Ospom> adds features necessary for all Ospom Arduino's
-
-	Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
+*Copyright 2015 Scott Tomko, Greg Tomko, Linda Close
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,10 +17,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 (GNU General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public 
-License along with this program.  If not, see <http://www.gnu.org/licenses/>.
+License along with this program.  If not, see <http://www.gnu.org/licenses/>.*
 
-Contact:  Staff@ReefPOM.com
+**Contact:  Staff@ReefPOM.com**
 
-
-Notes:
-  Triacs must be the first Elements to Dim Properly
